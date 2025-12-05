@@ -1,2 +1,4 @@
 /venv
 /.idea
+/examples/packages_examples/data/
+/examples/packages_examples/sp500-ticker-list.txt
