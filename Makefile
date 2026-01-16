@@ -12,7 +12,7 @@ lint:
 	uv run ruff check .
 
 test:
-	uv run pytest -n 4
+	(cd examples/portfolio-analytics && uv run pytest -n 4)
 
 clean:
 	rm -rf .venv .ruff_cache .pytest_cache dist
