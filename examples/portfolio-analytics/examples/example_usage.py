@@ -1,6 +1,6 @@
-from portfolio_analytics.metrics import daily_returns, mean_returns, cov_matrix
-from portfolio_analytics.optimize import min_variance, max_sharpe
-from portfolio_analytics.datafetch import DataFetcher
+from portfolio_analytix.metrics import daily_returns, mean_returns, cov_matrix
+from portfolio_analytix.optimize import min_variance, max_sharpe
+from portfolio_analytix.datafetch import DataFetcher
 
 # 0) Select some tickers
 tickers = ["AAPL", "MSFT", "BTC-USD"]

@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import yfinance as yf
-from portfolio_analytics.datafetch import DataFetcher
+from portfolio_analytix.datafetch import DataFetcher
 
 
 ## --- Mocking Fixture ---

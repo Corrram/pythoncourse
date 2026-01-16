@@ -7,8 +7,8 @@ Tests for the optimize module, focusing on min_variance and max_sharpe.
 import pytest
 import numpy as np
 import pandas as pd
-from portfolio_analytics.optimize import min_variance, max_sharpe
-from portfolio_analytics.metrics import portfolio_performance
+from portfolio_analytix.optimize import min_variance, max_sharpe
+from portfolio_analytix.metrics import portfolio_performance
 
 
 @pytest.mark.parametrize("returns_dict, cov_matrix, expected_idx_greater", [

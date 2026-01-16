@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from portfolio_analytics.metrics import (
+from portfolio_analytix.metrics import (
     daily_returns,
     mean_returns,
     cov_matrix,
