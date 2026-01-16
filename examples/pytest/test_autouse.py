@@ -3,6 +3,7 @@
 import pytest
 import os
 
+
 @pytest.fixture(autouse=True, scope="session")
 def set_test_mode_env():
     """
@@ -17,10 +18,12 @@ def set_test_mode_env():
     print("[autouse fixture] Cleaning up environment variable.")
     os.environ.pop("MY_APP_TEST_MODE", None)
 
+
 def test_first():
     # The environment variable is set automatically by set_test_mode_env
     assert os.getenv("MY_APP_TEST_MODE") == "1"
     print("Running test_first...")
+
 
 def test_second():
     # The environment variable is still set for this test

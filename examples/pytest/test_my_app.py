@@ -3,6 +3,7 @@ import tempfile
 import os
 import my_app
 
+
 @pytest.fixture
 def temp_file():
     """
@@ -14,6 +15,7 @@ def temp_file():
     yield file_name
     os.remove(file_name)  # Cleanup after test
 
+
 def test_write_and_read(temp_file):
     """
     Tests that write_message_to_file correctly writes content
@@ -24,6 +26,7 @@ def test_write_and_read(temp_file):
 
     result = my_app.read_message_from_file(temp_file)
     assert result == test_message
+
 
 def test_overwrite_content(temp_file):
     """

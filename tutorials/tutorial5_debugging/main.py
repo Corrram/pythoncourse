@@ -1,6 +1,10 @@
 from loader import load_participants, load_measurements
 from preprocessing import clean_participants, clean_measurements
-from stats import index_measurements_by_participant, compute_improvements, aggregate_by_group
+from stats import (
+    index_measurements_by_participant,
+    compute_improvements,
+    aggregate_by_group,
+)
 from summary import generate_report
 
 

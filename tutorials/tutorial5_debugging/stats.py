@@ -4,7 +4,9 @@ from typing import Dict, List
 from config import PRE_SESSION, POST_SESSION
 
 
-def index_measurements_by_participant(measurements: List[Dict]) -> Dict[int, Dict[int, float]]:
+def index_measurements_by_participant(
+    measurements: List[Dict],
+) -> Dict[int, Dict[int, float]]:
     """
     Build a nested dict:
         participant_id -> { session -> score }
@@ -29,7 +31,10 @@ def compute_improvements(participants, measurements_index):
 
         participant_measures = measurements_index.get(pid, {})
 
-        if PRE_SESSION not in participant_measures or POST_SESSION not in participant_measures:
+        if (
+            PRE_SESSION not in participant_measures
+            or POST_SESSION not in participant_measures
+        ):
             continue
 
         pre_score = participant_measures[PRE_SESSION]

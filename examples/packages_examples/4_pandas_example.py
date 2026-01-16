@@ -68,8 +68,7 @@ if __name__ == "__main__":
     index_returns = index_prices["Close"].pct_change()
 
     stock_returns = {
-        name: data["Close"].pct_change()
-        for name, data in stock_prices.items()
+        name: data["Close"].pct_change() for name, data in stock_prices.items()
     }
 
     betas = {

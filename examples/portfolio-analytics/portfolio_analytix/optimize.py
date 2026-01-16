@@ -6,7 +6,6 @@ Functions to optimize a portfolio using mean-variance (Markowitz) approaches.
 
 import numpy as np
 import pandas as pd
-from typing import Tuple, Callable
 from scipy.optimize import minimize
 from .metrics import portfolio_performance, sharpe_ratio
 

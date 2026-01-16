@@ -6,6 +6,7 @@ from portfolio_analytix.datafetch import DataFetcher
 
 ## --- Mocking Fixture ---
 
+
 @pytest.fixture
 def mock_yfinance(monkeypatch):
     """
@@ -17,10 +18,7 @@ def mock_yfinance(monkeypatch):
         # yfinance returns a MultiIndex (Price, Ticker) when multiple tickers are fetched
         # or a single Index when 'Close' is selected.
         # Here we simulate the MultiIndex structure yf.download usually provides.
-        data = {
-            ("Close", "AAPL"): [150.0, 151.0],
-            ("Close", "MSFT"): [250.0, 252.0]
-        }
+        data = {("Close", "AAPL"): [150.0, 151.0], ("Close", "MSFT"): [250.0, 252.0]}
         df = pd.DataFrame(data, index=pd.to_datetime(["2023-01-10", "2023-01-11"]))
         df.index.name = "Date"
         return df

@@ -6,7 +6,6 @@ Core financial metrics: returns, covariance, Sharpe ratio, etc.
 
 import pandas as pd
 import numpy as np
-from typing import Optional
 
 
 def daily_returns(price_df: pd.DataFrame) -> pd.DataFrame:
@@ -54,8 +53,11 @@ def portfolio_performance(
     :return: (portfolio_return, portfolio_volatility)
     """
     port_ret = np.dot(weights, mean_rets.values)
-    port_vol = np.sqrt(weights @ cov.values @ weights)
-    return port_ret, port_vol
+    try:
+        port_volatility = np.sqrt(weights @ cov.values @ weights)
+    except np.linalg.LinAlgError:
+        port_volatility = np.nan
+    return port_ret, port_volatility
 
 
 def sharpe_ratio(

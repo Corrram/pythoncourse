@@ -1,5 +1,6 @@
 from examples.pytest.mocking.email_client import notify_all_customers
 
+
 def test_notify_all_customers(mocker):
     """
     Demonstrates how to mock both the DB call and the email sending
@@ -10,8 +11,8 @@ def test_notify_all_customers(mocker):
         "examples.pytest.mocking.email_client.database.get_customers",
         return_value=[
             {"FirstName": "John", "LastName": "Doe", "Email": "john@example.com"},
-            {"FirstName": "Jane", "LastName": "Smith", "Email": "jane@example.com"}
-        ]
+            {"FirstName": "Jane", "LastName": "Smith", "Email": "jane@example.com"},
+        ],
     )
 
     # Mock the email sending function
@@ -29,10 +30,10 @@ def test_notify_all_customers(mocker):
     mock_send_email.assert_any_call(
         recipient="john@example.com",
         subject="New Music Release",
-        body="Hello John Doe,\nWe have new music for you to enjoy!"
+        body="Hello John Doe,\nWe have new music for you to enjoy!",
     )
     mock_send_email.assert_any_call(
         recipient="jane@example.com",
         subject="New Music Release",
-        body="Hello Jane Smith,\nWe have new music for you to enjoy!"
+        body="Hello Jane Smith,\nWe have new music for you to enjoy!",
     )

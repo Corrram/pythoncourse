@@ -11,34 +11,35 @@ from portfolio_analytix.metrics import (
 
 ## --- Fixtures ---
 
+
 @pytest.fixture
 def sample_prices():
     """Simple price history for two assets."""
-    return pd.DataFrame({
-        "A": [100.0, 101.0, 102.01], # +1% daily
-        "B": [50.0, 50.0, 50.0]      # 0% daily
-    })
+    return pd.DataFrame(
+        {
+            "A": [100.0, 101.0, 102.01],  # +1% daily
+            "B": [50.0, 50.0, 50.0],  # 0% daily
+        }
+    )
+
 
 @pytest.fixture
 def sample_returns():
     """Known returns for deterministic math checks."""
-    return pd.DataFrame({
-        "A": [0.01, 0.02, 0.015], 
-        "B": [-0.005, 0.0, 0.005]
-    })
+    return pd.DataFrame({"A": [0.01, 0.02, 0.015], "B": [-0.005, 0.0, 0.005]})
+
 
 @pytest.fixture
 def portfolio_data():
     """Standardized mean returns and cov matrix for portfolio math."""
     mean_ret = pd.Series({"A": 0.1, "B": 0.05})
     # Diagonal matrix: Vol_A = sqrt(0.04)=0.2, Vol_B = sqrt(0.01)=0.1
-    cov = pd.DataFrame({
-        "A": [0.04, 0.00], 
-        "B": [0.00, 0.01]
-    }, index=["A", "B"])
+    cov = pd.DataFrame({"A": [0.04, 0.00], "B": [0.00, 0.01]}, index=["A", "B"])
     return mean_ret, cov
 
+
 ## --- Tests ---
+
 
 def test_daily_returns(sample_prices):
     rets = daily_returns(sample_prices)
@@ -62,15 +63,24 @@ def test_cov_matrix(sample_returns):
     assert cv.loc["A", "A"] > 0  # Variance must be positive
 
 
-@pytest.mark.parametrize("weights, expected_ret, expected_vol", [
-    (np.array([1.0, 0.0]), 0.10, 0.20),  # 100% A -> Ret: 0.1, Vol: sqrt(0.04)
-    (np.array([0.0, 1.0]), 0.05, 0.10),  # 100% B -> Ret: 0.05, Vol: sqrt(0.01)
-    (np.array([0.5, 0.5]), 0.075, 0.111803398) # 50/50 -> sqrt(0.5^2*0.04 + 0.5^2*0.01)
-])
-def test_portfolio_performance_parameterized(portfolio_data, weights, expected_ret, expected_vol):
+@pytest.mark.parametrize(
+    "weights, expected_ret, expected_vol",
+    [
+        (np.array([1.0, 0.0]), 0.10, 0.20),  # 100% A -> Ret: 0.1, Vol: sqrt(0.04)
+        (np.array([0.0, 1.0]), 0.05, 0.10),  # 100% B -> Ret: 0.05, Vol: sqrt(0.01)
+        (
+            np.array([0.5, 0.5]),
+            0.075,
+            0.111803398,
+        ),  # 50/50 -> sqrt(0.5^2*0.04 + 0.5^2*0.01)
+    ],
+)
+def test_portfolio_performance_parameterized(
+    portfolio_data, weights, expected_ret, expected_vol
+):
     mean_ret, cov = portfolio_data
     port_ret, port_vol = portfolio_performance(weights, mean_ret, cov)
-    
+
     assert abs(port_ret - expected_ret) < 1e-8
     assert abs(port_vol - expected_vol) < 1e-8
 

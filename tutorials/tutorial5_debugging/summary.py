@@ -26,9 +26,7 @@ def generate_report(improvements, group_stats):
         lines.append(
             f" - mean raw score: {stats['avg_pre']:.1f} → {stats['avg_post']:.1f}"
         )
-        lines.append(
-            f" - mean improvement index: {stats['avg_improvement_index']:.3f}"
-        )
+        lines.append(f" - mean improvement index: {stats['avg_improvement_index']:.3f}")
         lines.append("")
 
     # Optional: overall comparison between groups
@@ -44,4 +42,3 @@ def generate_report(improvements, group_stats):
         )
 
     return "\n".join(lines)
-

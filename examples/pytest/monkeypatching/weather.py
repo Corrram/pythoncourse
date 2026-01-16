@@ -1,5 +1,6 @@
 import requests
 
+
 def get_weather(city):
     """
     Makes a GET request to a weather API and returns the temperature.

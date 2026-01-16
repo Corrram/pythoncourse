@@ -7,9 +7,7 @@ import yfinance as yf
 
 def fetch_sp500_tickers():
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    }
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
     # 1) Get the page with a proper User-Agent
     resp = requests.get(url, headers=headers)

@@ -20,8 +20,8 @@ for stock_file in stock_files:
     stock_data[stock_name] = np.loadtxt(
         stock_file,
         delimiter=",",
-        skiprows=3,   # <-- FIX: skip 'Price', 'Ticker', 'Date'
-        usecols=1     # <-- FIX: column 1 = Close
+        skiprows=3,  # <-- FIX: skip 'Price', 'Ticker', 'Date'
+        usecols=1,  # <-- FIX: column 1 = Close
     )
 
     # calculate daily returns from absolute prices
@@ -33,8 +33,7 @@ for stock_file in stock_files:
 # keep only stocks with most data points
 max_data_len = max(len(data) for data in stock_data.values())
 stock_data = {
-    name: data for name, data in stock_data.items()
-    if len(data) == max_data_len
+    name: data for name, data in stock_data.items() if len(data) == max_data_len
 }
 
 # calculate correlation matrix

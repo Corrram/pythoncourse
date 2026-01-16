@@ -15,7 +15,9 @@ aligned_data = pd.concat([stock_returns, market_returns], axis=1).dropna()
 aligned_data.columns = ["Stock_Returns", "Market_Returns"]
 
 # Linear regression
-X = sm.add_constant(aligned_data["Market_Returns"])  # Adds a constant term to the predictor
+X = sm.add_constant(
+    aligned_data["Market_Returns"]
+)  # Adds a constant term to the predictor
 model = sm.OLS(aligned_data["Stock_Returns"], X)
 results = model.fit()
 
@@ -28,4 +30,3 @@ plt.plot(aligned_data["Market_Returns"], results.fittedvalues)
 plt.xlabel("Market Returns")
 plt.ylabel("Stock Returns")
 plt.show()
-

@@ -24,8 +24,4 @@ def notify_all_customers(db_path):
             f"Hello {customer['FirstName']} {customer['LastName']},\n"
             "We have new music for you to enjoy!"
         )
-        send_email(
-            recipient=customer['Email'],
-            subject=subject,
-            body=body
-        )
+        send_email(recipient=customer["Email"], subject=subject, body=body)

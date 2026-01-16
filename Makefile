@@ -1,4 +1,4 @@
-.PHONY: install format lint test clean build
+.PHONY: install format lint test clean build all
 
 install:
 	uv sync --active --all-groups
@@ -20,3 +20,5 @@ clean:
 
 build:
 	uv build
+
+all: install format link test
