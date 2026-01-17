@@ -31,18 +31,23 @@ WHERE Name LIKE '%Love%';
 SELECT *
 FROM albums
 WHERE title LIKE '% %';
+--% % 是通配符，表示名称中间有空格，从而表示多于一个单词。
 
 -- Q4: List all distinct billing countries on invoices (alphabetically).
-SELECT DISTINCT BillingCountry
+SELECT DISTINCT BillingCountry --select后面加distinct表示只选择不重复的值
 FROM invoices
-ORDER BY BillingCountry;
+ORDER BY BillingCountry; --order by表示排序 billingcountry表示按国家名排序
 
 -- Q5: List all tracks whose media type is either MPEG audio file or AAC audio file.
-SELECT t.TrackId, t.Name, mt.Name AS MediaType
-FROM tracks t
-JOIN media_types mt ON t.MediaTypeId = mt.MediaTypeId
-WHERE mt.Name IN ('MPEG audio file', 'AAC audio file')
-ORDER BY t.Name;
+SELECT t.TrackId, t.Name, mt.Name AS MediaType --选择曲目ID，曲目名称，媒体类型名称
+--t.TrackId表示曲目ID，t.Name表示曲目名称，mt.Name表示媒体类型名称，
+--t的意思是tracks表，mt的意思是media_types表，as MediaType是给mt.Name起的别名
+FROM tracks t --从tracks表中选择数据，起别名t
+JOIN media_types mt ON t.MediaTypeId = mt.MediaTypeId 
+--连接media_types表，起别名mt，连接条件是tracks表的MediaTypeId等于media_types表的MediaTypeId
+--on后面是连接条件
+WHERE mt.Name IN ('MPEG audio file', 'AAC audio file')--筛选条件是媒体类型名称在'MPEG audio file'和'AAC audio file'之中
+ORDER BY t.Name;--按曲目名称排序
 
 -- Q6: List all invoices issued in the year 2011 (inclusive), using BETWEEN.
 SELECT InvoiceId, InvoiceDate, Total
@@ -56,11 +61,11 @@ ORDER BY InvoiceDate, InvoiceId;
 -- ============================================================
 
 -- Q1: Find the 10 albums with the highest number of tracks, listing album title and track count.
-SELECT al.Title, COUNT(t.TrackId) AS TrackCount
+SELECT al.AlbumId, al.Title, COUNT(t.TrackId) AS TrackCount
 FROM albums al
 JOIN tracks t ON t.AlbumId = al.AlbumId
-GROUP BY al.AlbumId, al.Title
-ORDER BY TrackCount DESC, al.Title
+GROUP BY al.AlbumId, al.Title--按专辑ID和标题分组
+ORDER BY TrackCount DESC, al.Title --al.Title用于在TrackCount相同时进行次级排序
 LIMIT 10;
 
 -- Q2: For each sales support agent, determine how many customers they support.
@@ -296,3 +301,4 @@ ROLLBACK;
    Note: Resources often offer a mix of free content and premium features,
    but the free tiers are usually sufficient for practice.
    ============================================================ */
+
